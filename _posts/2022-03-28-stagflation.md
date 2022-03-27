@@ -1,1 +1,9 @@
-a
+---
+layout: post
+title: "The Stagflation Problem"
+date: 2022-03-28
+author: "Luke Min"
+tags: "Economics"
+---
+
+Here is a test post
