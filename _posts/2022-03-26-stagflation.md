@@ -7,3 +7,7 @@ tags: "Economics"
 ---
 
 Here is a test post
+
+\[ x = y \]
+
+
