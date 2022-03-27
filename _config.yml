@@ -1,6 +1,6 @@
 title: This is the name of the site.
 logo: /assets/img/logo.png
 description: This is a description for the site.
-show_downloads: true
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-minimal
