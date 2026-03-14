@@ -1,0 +1,13 @@
+title: Luke Min
+description: Personal website
+baseurl: ""
+url: ""
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+markdown: kramdown
+kramdown:
+  math_engine: null
+permalink: pretty
