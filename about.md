@@ -7,32 +7,4 @@ title: About
 
 This is the about page! Here I will write about the type of person that I am, and try to describe why I made this website.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-a
+Here's a test update.
