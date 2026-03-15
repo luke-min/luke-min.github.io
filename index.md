@@ -3,4 +3,4 @@ layout: default
 title: Home
 ---
 
-![Alt text](assets/test.jpg)
+![Alt text](assets/blue-wavicle.jpg)
