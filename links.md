@@ -5,5 +5,5 @@ title: Links
 
 # Links
 
-Some links that I might want to share
-
+* Link 1
+* Link 2

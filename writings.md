@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Technical
+title: Writings
 ---
 
-# Technical
+# Writings
 
 Here are some essays.
 
