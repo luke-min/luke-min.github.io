@@ -5,7 +5,7 @@ title: Writings
 
 # Writings
 
-[Feynman's Thai Restaurant Problem](./feynman-thai-restaurant.md)
+[Feynman's Thai Restaurant Problem](./feynman-thai-restaurant)
 
 [Sample Post](./2024-01-01-sample)
 
