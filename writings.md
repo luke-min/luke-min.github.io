@@ -5,8 +5,7 @@ title: Writings
 
 # Writings
 
-[Feynman's Thai Restaurant Problem]({{ '/writings/feynman-thai-restaurant/' | relative_url }})
-
-[Sample Post](./2024-01-01-sample)
-
-[Sample Math Post](./sample-math)
+{% for post in site.posts %}
+- [{{ post.title }}]({{ post.url | relative_url }})  
+  {{ post.date | date: "%B %-d, %Y" }}
+{% endfor %}

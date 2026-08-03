@@ -10,4 +10,4 @@ plugins:
 markdown: kramdown
 kramdown:
   math_engine: null
-permalink: pretty
+permalink: /writings/:title/

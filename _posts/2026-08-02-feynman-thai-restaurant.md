@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Feynman's Thai Restaurant Problem
 permalink: /writings/feynman-thai-restaurant/
 ---
@@ -98,5 +98,5 @@ $$
 
 ## Conclusion
 
-![Feynman's restaurant problem](/writings/French_breaker.webp)
+![Feynman's restaurant problem](/assets/post-images/French_breaker.webp)
 

@@ -1,1 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-08-02T20:06:38-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Luke Min</title><subtitle>Personal website</subtitle></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-08-02T20:28:44-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Luke Min</title><subtitle>Personal website</subtitle><entry><title type="html">Feynman’s Thai Restaurant Problem</title><link href="http://localhost:4000/writings/feynman-thai-restaurant/" rel="alternate" type="text/html" title="Feynman’s Thai Restaurant Problem" /><published>2026-08-02T00:00:00-04:00</published><updated>2026-08-02T00:00:00-04:00</updated><id>http://localhost:4000/writings/feynman-thai-restaurant</id><content type="html" xml:base="http://localhost:4000/writings/feynman-thai-restaurant/"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p>In the 1970s, <a href="https://www.scientificamerican.com/article/how-math-can-help-you-decide-what-to-order-for-dinner/">the physicist Richard Feynman dined at a Thai restaurant</a> with a friend. When his friend agonized over ordering his favorite known dish or something new, Feynman used the opportunity to turn this into a math problem.</p>
+
+<p>Originally scrawled into a napkin scrawl, the setup proves that you should try different items until you reach a quality threshold. If you pass that point, you settle on the best dish encountered so far!</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>Let’s say there is a known favorite dish with value $p\in\left[0,1\right]$. Each unknown dish has value $X \sim \text{Uniform}[0,1]$. Each night, he chooses between (1) ordering the known favorite for all remaining $m$ meals; and (2) trying a new dish tonight with random value $X$.</p>
+
+<p>This now becomes an optimal stopping problem. Let’s call $V_{m} \left( p \right)$ the value function for the case with $m$ remaining visits. $x$ is our state variable.</p>
+
+<p>Then, each time we have</p>
+
+<div class="kdmath">$$
+V_{m} \left(p\right) = \max\{p + V_{m-1}(p), \mathbb{E}\left[X + V_{m-1} \left(\max\{p, X\}\right)\right]  \}
+$$</div>
+
+<p>with a terminal condition $V_{0} \left( p \right)$.</p>
+
+<p>The first quantity the payoff from sticking to the current dish with value $p$. The second quantity $\mathbb{E}\left[X + V_{m-1} \left(\max{p, X}\right)\right]$ draws from $X$, finds a new best known value up to that meal $\max{p,X}$, which then becomes the new state variable in the value function $V_{m-1}$. The value function encodes the possibility that this new meal $X$ is not worth commiting to, and may have to draw again next period.</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>It’s always good to start with the intuition first. Remember:</p>
+
+<ul>
+  <li>$p$ is how good your current favorite is</li>
+  <li>$m$ how many meals you have left</li>
+  <li>$X$ quality of a new dish (which is not known)</li>
+</ul>
+
+<p>The more meals you have left, the more valuable exploration is. Exploration is valuable not just because you might get a better meal than your known favorite, but also because it raises the bar for your future meals. So the cutoff for commitment is higher when $m$ is large, lower when $m$ is small.</p>
+
+<p>We can make this simpler. At the optimum, you will start exploring immediately, until you commit. You can rule out cases like “eat $p$ for $k$ meals, then try a new dish $X$”. This will give you $kp+X$, whereas exploring today, and then eating the better of $p$ and $X$ will give you $X+k\max{p,X}$. The latter is always larger.</p>
+
+<p>So the value function is actually</p>
+
+<div class="kdmath">$$
+V_{m} \left(p\right) = \max\{pm , \mathbb{E}\left[X + V_{m-1} \left(\max\{p, X\}\right)\right]  \}
+$$</div>
+
+<p>after modifying the first quantity. Hence, the lesson is:</p>
+
+<div class="kdmath">$$
+\boxed{\text{If you are ever going to explore, explore right now.}}
+$$</div>
+
+<p>Now we can solve it. Let $p_m$ be the cutoff. Then</p>
+
+<div class="kdmath">$$
+\text{Stop payoff} = \text{Explore payoff}
+$$</div>
+
+<p>which can be written as</p>
+
+<div class="kdmath">$$
+mp = \int_{0}^{p} \left[ x + (m-1)p \right]dx + \int_{p}^{1} \left[ x + \left(m -1 \right)x \right]dx
+$$</div>
+
+<p>$p_m$ is the value that makes this hold.</p>
+
+<p>The first quantity on the right hand side is the case where you draw something worse then $p$ and you stick with what you know. The second quantity is the case where you draw something better, and you stay with $x$. We are implicitly using the fact that $p_{m} &gt; p_{m-1}$.</p>
+
+<p>If you solve that you get</p>
+
+<div class="kdmath">$$
+p_m = \frac{\sqrt{m}}{\sqrt{m}+1}
+$$</div>
+
+<p>and the policy is:</p>
+
+<div class="kdmath">$$
+\begin{aligned}
+\text{Try new dish} & \quad \text{if }p < p_m \\
+\text{Stick with favoriate} & \quad \text{if }p \geq p_m \\
+\end{aligned}
+$$</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><img src="/assets/post-images/French_breaker.webp" alt="Feynman's restaurant problem" /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Introduction]]></summary></entry><entry><title type="html">Singular Value Decomposition Notes</title><link href="http://localhost:4000/writings/sample-math/" rel="alternate" type="text/html" title="Singular Value Decomposition Notes" /><published>2025-01-01T00:00:00-05:00</published><updated>2025-01-01T00:00:00-05:00</updated><id>http://localhost:4000/writings/sample-math</id><content type="html" xml:base="http://localhost:4000/writings/sample-math/"><![CDATA[<p>Singular Value Decomposition (SVD) is one of the most powerful tools in linear algebra.<br />
+It allows us to factorize any real matrix ( A \in \mathbb{R}^{m \times n} ).</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>For any matrix \( A \), there exist orthogonal matrices \( U \) and \( V \), and a diagonal matrix \( \Sigma \) such that:</p>
+
+<div class="kdmath">$$
+A = U \Sigma V^{T}
+$$</div>
+
+<div class="kdmath">$$
+\sum_i \sigma_i
+$$</div>
+
+<p>where:</p>
+
+<ul>
+  <li>\( U \in \mathbb{R}^{m \times m} \)</li>
+  <li>\( \Sigma \in \mathbb{R}^{m \times n} \)</li>
+  <li>\( V \in \mathbb{R}^{n \times n} \)</li>
+</ul>
+
+<p>The diagonal entries of \( \Sigma \), denoted \( \sigma_i \), are called <strong>singular values</strong>.</p>
+
+<h2 id="rank-approximation">Rank Approximation</h2>
+
+<p>A key application is low-rank approximation.</p>
+
+<p>If we write:</p>
+
+<div class="kdmath">$$
+A = \sum_{i=1}^{r} \sigma_i u_i v_i^{T}
+$$</div>
+
+<p>then the best rank-(k) approximation (in Frobenius norm) is:</p>
+
+<div class="kdmath">$$
+A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^{T}
+$$</div>
+
+<p>This is the foundation of:</p>
+
+<ul>
+  <li>PCA</li>
+  <li>matrix compression</li>
+  <li>recommender systems</li>
+  <li>latent factor models</li>
+</ul>
+
+<h2 id="geometric-interpretation">Geometric Interpretation</h2>
+
+<p>SVD can be interpreted as:</p>
+
+<ol>
+  <li>Rotate space via ( V^{T} )</li>
+  <li>Stretch along orthogonal axes via ( \Sigma )</li>
+  <li>Rotate again via ( U )</li>
+</ol>
+
+<p>Thus SVD transforms the unit sphere into an ellipsoid.</p>
+
+<h2 id="condition-number">Condition Number</h2>
+
+<p>The stability of a matrix is governed by:</p>
+
+<div class="kdmath">$$
+\kappa(A) = \frac{\sigma_{\max}}{\sigma_{\min}}
+$$</div>
+
+<p>Large condition numbers imply numerical instability.</p>
+
+<hr />
+
+<p>This post exists purely to test layout, spacing, and math rendering.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Singular Value Decomposition (SVD) is one of the most powerful tools in linear algebra. It allows us to factorize any real matrix ( A \in \mathbb{R}^{m \times n} ).]]></summary></entry><entry><title type="html">First Essay</title><link href="http://localhost:4000/writings/sample/" rel="alternate" type="text/html" title="First Essay" /><published>2024-01-01T00:00:00-05:00</published><updated>2024-01-01T00:00:00-05:00</updated><id>http://localhost:4000/writings/sample</id><content type="html" xml:base="http://localhost:4000/writings/sample/"><![CDATA[<p>This is a sample writing post.</p>
+
+<p>Line length and spacing will already match the design system.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[This is a sample writing post.]]></summary></entry></feed>
