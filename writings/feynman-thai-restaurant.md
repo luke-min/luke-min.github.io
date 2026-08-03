@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Feynman's Thai Restaurant Problem
+permalink: /writings/feynman-thai-restaurant/
 ---
 
 ## Introduction
